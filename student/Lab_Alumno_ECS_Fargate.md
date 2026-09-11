@@ -56,11 +56,11 @@ El stack tarda 2-3 minutos en crearse. Puedes ver el progreso en la pestaña **E
 
 | Output | Anota aquí |
 |---|---|
-| `VpcId` | _________________________ |
-| `PublicSubnet1Id` | _________________________ |
-| `PublicSubnet2Id` | _________________________ |
-| `ALBSecurityGroupId` | _________________________ |
-| `FargateTaskSecurityGroupId` | _________________________ |
+| `VpcId` | vpc-07a3c9c053cce0da5 |
+| `PublicSubnet1Id` | subnet-070a258dd520358d6 |
+| `PublicSubnet2Id` | subnet-0abf583c2791167d8 |
+| `ALBSecurityGroupId` | sg-0d4d73ab61b7849dd |
+| `FargateTaskSecurityGroupId` | sg-08875e88a85d6d6f9 |
 
 > [!tip] ¿Qué acabas de crear?
 > Una VPC con dos subredes públicas en dos zonas de disponibilidad distintas (para que la aplicación siga funcionando aunque una zona tenga problemas), y dos "security groups" — uno que va a proteger el balanceador de carga (permitiendo tráfico web desde internet) y otro que va a proteger tu aplicación (permitiendo tráfico únicamente desde el balanceador, no directamente desde internet).
@@ -101,7 +101,7 @@ Una task definition es como un plano: le dice a ECS qué imagen de contenedor us
    - Task execution role: deja **Create new role** (la consola va a crear automáticamente los permisos mínimos que Fargate necesita).
 6. Baja hasta "Container - 1" y completa:
    - Name: `demo-container`
-   - Image URI: `public.ecr.aws/ecs-sample-image/amazon-ecs-sample:latest`
+   - Image URI: `public.ecr.aws/docker/library/httpd:2.4`
    - Container port: `80`
    - Protocol: `TCP`
    - App protocol: `HTTP`
@@ -111,7 +111,7 @@ Una task definition es como un plano: le dice a ECS qué imagen de contenedor us
 ✅ **Checkpoint:** deberías ver `demo-task` en la lista de Task definitions, con al menos una revisión (`1`) en estado `ACTIVE`.
 
 > [!tip] ¿Qué es esa imagen que usaste?
-> `amazon-ecs-sample` es una imagen pública de contenedor mantenida por el propio equipo de AWS — una página web simple diseñada específicamente para probar despliegues de ECS. No necesitas construir ni subir ninguna imagen tú mismo para este lab.
+> `public.ecr.aws/docker/library/httpd:2.4` es el servidor web Apache HTTP Server oficial, disponible en el registro público de ECR de AWS. Es la imagen que la propia documentación de AWS usa en sus ejemplos de ECS con Fargate. No necesitas construir ni subir ninguna imagen tú mismo para este lab.
 
 ---
 
